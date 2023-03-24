@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.IO;
 
 public class MainManager : MonoBehaviour
 {
@@ -18,7 +19,9 @@ public class MainManager : MonoBehaviour
     
     private bool m_GameOver = false;
 
-    
+    // This code enables you to access the MainManager object from any other script.
+    public static MainManager Instance;
+
     // Start is called before the first frame update
     void Start()
     {
