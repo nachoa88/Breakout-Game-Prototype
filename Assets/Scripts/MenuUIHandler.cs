@@ -13,30 +13,31 @@ using UnityEngine.UI;
 public class MenuUIHandler : MonoBehaviour
 {
 
-    public TMP_InputField playerInputName;
-    public string playerName;
+    public TMP_InputField playerNameInput;
+    public TextMeshProUGUI bestScoreText;
 
     private void Awake()
     {
-        
+        if (MenuManager.Instance != null)
+        {
+            bestScoreText.text = $" {MenuManager.Instance.playerWithBestScore} {MenuManager.Instance.bestScore}";
+        }
     }
 
-    public void StartNew()
+    public void OnStartClick()
     {
+        MenuManager.Instance.playerName = playerNameInput.text;
         SceneManager.LoadScene(1);
-        playerName = playerInputName.text;
     }
 
-    public void Exit()
+
+    public void OnQuitClick()
     {
-        /* All lines starting with # aren’t really “code”. They won’t be compiled and executed, they’re actually instructions for the compiler.
-           In this case, when the code is compiled inside the Editor then UNITY_EDITOR is true, it will keep the EditorApplication.ExitPlaymode() 
-           code and discard the Application.Quit. When you build a player, UNITY_EDITOR will be false, and so it will keep Application.Quit() 
-           and discard EditorApplication.ExitPlaymode() ! */
+        MenuManager.Instance.SavePlayerScore();
 #if UNITY_EDITOR
         EditorApplication.ExitPlaymode();
 #else
-        Application.Quit();
+        Application.Quit(); // original code to quit Unity player
 #endif
     }
 }
