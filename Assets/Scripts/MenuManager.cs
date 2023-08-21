@@ -15,15 +15,12 @@ public class MenuManager : MonoBehaviour
     public string playerWithBestScore;
 
 
-
     public void Awake()
     {
         if (Instance != null)
         {
-
             Destroy(gameObject);
             return;
-
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
